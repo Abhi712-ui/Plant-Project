@@ -1,0 +1,18 @@
+# Virtual environment
+.venv/
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.egg-info/
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+# Kaggle credentials
+kaggle.json
+.kaggle/
+# Environment variable files
+.env
+# macOS system files
+.DS_Store
+# IDE and editor directories
+.vscode/
+.idea/
