@@ -18,7 +18,7 @@ model, class_names = get_model()
 st.title("Plant Disease Classifier")
 st.write(
     "Upload a photograph of a plant and the model will identify the crop species and and diseases present"
-    "Trained on the New Plant Diseases dataset with 98.7 percent accuracy"
+    "\nTrained on the New Plant Diseases dataset with 98.7 percent accuracy"
 )
 uploaded_file = st.file_uploader(
     "Upload a plant image",
