@@ -1,4 +1,15 @@
-# Plant-Project
+---
+title: Plant Disease Classifier
+emoji: 🌿
+colorFrom: green
+colorTo: blue
+sdk: streamlit
+sdk_version: "1.40.0"
+app_file: streamlit_app.py
+pinned: false
+---
+
+## Plant-Project
 
 - Input: A photograph of a plant leaf, that is uploaded by the user.
 - Output: A predicted disease class or a healthy determination, from the set of classes in the training data, along with a confidence score.
