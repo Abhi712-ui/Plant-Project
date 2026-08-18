@@ -9,7 +9,7 @@ Upload an image of a leaf and the model returns the crop species, the disease pr
 
 | Metric | Value |
 | --- | --- |
-| Validation accuracy | 98.7% |
+| Validation accuracy | 98.3% |
 | Classes | 38 (14 crop species, in both healthy and diseased states) |
 | Training images | ~70,000 |
 | Architecture | ResNet18, fine-tuned through transfer learning |
@@ -31,4 +31,31 @@ Upload an image of a leaf and the model returns the crop species, the disease pr
 
 - Weights were saved whenever validation accuracy reached a new best, instead of only at the end of training
 - In the baseline training, the best model was produced after one epoch, but was overwritten by weaker weights in epoch two
+
+#### Confusion Matrix
+
+![confusion matrix](confusion_matrix.jpeg)
+
+- Overall, the model was able to correctly identify the class for each image during validation, as evidenced by the almost perfect diagonal line descending from left to right
+- However, the model made more incorrect predictions for photos of Corn with Cercospora leaf spot/Gray Leaf Spot, mistakenly labeling it as Corn with Northern Leaf Blight.
+- Rather than a simple arbitrary failure, this is meaningful, as both Gray Leaf Spot Northern Leaf Blight can appear similar to Cercospora leaf spot, typically taking the form of elongated grey or tan lesions on the leaf of the plant
+- More confusions occured in the Tomato class, with Tomato - 2 spotted spider mites being mistakenly labeled a few times as Tomato - Target Spot.
+- Misclassifications tend to occur within plant classes rather than across classes, meaning that the model reliably can identify plant species level features, and only falters on diseases with difficult boundaries.
+
+## Approach
+
+### Data
+
+- The model is trained on the [New Plant Diseases dataset](https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset), which contained aruond 87,000 labeled leaf images split across 38 classes.
+- Each class corresponded with a plant species paired with a condition, or a heathy state.
+- Initial exploration that I conducted confirmed that the dataset was approximately balanced across classes, with each image being a uniform 256 x 256 pixels.
+- These uniform properties meant that no class weighting or data cleaning steps were required, and my data pipeline could load images directly from their class directory.
+- The dataset provided its own train/test split of around 80/20.
+
+### Model
+
+- Transfer learning was utilized, with ResNet18, which is pretrained on ImageNet.
+- The final fully connected layer was replaced with a new layer that mapped the network's learned features onto the 38 target classes.
+- Input images were resized to 224 x 224 and were normalized using ImageNet statistics: `mean=[0.485, 0.456, 0.406]` and `std=[0.229, 0.224, 0.225]`, matching the expectations of the pretrained weights
+- Training used cross entropy loss and the Adam optimizer with a learning rate of 0.001, and a batch size of 32.
 
