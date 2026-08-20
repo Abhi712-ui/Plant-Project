@@ -32,6 +32,10 @@ Upload an image of a leaf and the model returns the crop species, the disease pr
 - Weights were saved whenever validation accuracy reached a new best, instead of only at the end of training
 - In the baseline training, the best model was produced after one epoch, but was overwritten by weaker weights in epoch two
 
+### Outcome
+
+- Retraining for three epochs with these changes reached a validation accuracy of 98.3%, up from 95.6%, confirming that the original gap was due to overfitting instead of insufficient model capacity.
+
 ## Evaluation
 
 ### Confusion Matrix
@@ -53,8 +57,8 @@ Upload an image of a leaf and the model returns the crop species, the disease pr
 - Initial exploration that I conducted confirmed that the dataset was approximately balanced across classes, with each image being a uniform 256 x 256 pixels.
 - These uniform properties meant that no class weighting or data cleaning steps were required, and my data pipeline could load images directly from their class directory.
 - The dataset provided its own train/validation split of around 80/20.
-- The dataset's test directory contained 33 images with single leaves against uniform backgrounds
-- The reported accuracy is validation accuracy, which is also used for checkpoint selection
+- The dataset's test directory contained only 33 images, fewer than one per class, and has no class directory structure, so it is only intended for informal demonstration.
+- The reported figure is therefore validation accuracy, measured on a set that is also used for checkpoint selection.
 
 ### Model
 
